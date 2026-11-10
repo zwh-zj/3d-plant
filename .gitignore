@@ -1,16 +1,12 @@
-# 数据集、实验输出、预训练权重
-data/crops3d/train/
-data/crops3d/val/
-data/crops3d/test/
+# 数据集、实验输出、预训练权重、本地文档
+data/
 exps/
 backbones/
-Crops3D/*
-!Crops3D/train.txt
-!Crops3D/test.txt
+Crops3D/
+docs/
 Miniconda3-latest-Linux-x86_64.sh
 features/
 gres_model/torch/
-docs/superpowers/
 
 # 本机编译产物。源码保留，用 setup.py / CMake 重编。
 pointnet2/build/
