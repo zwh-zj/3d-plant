@@ -1,0 +1,16 @@
+{
+  "crop": "Wheat",
+  "language": "en",
+  "task": "organ_segmentation",
+  "input_dir": "Crops3D/Wheat",
+  "output_dir": "data/text_queries/Wheat",
+  "excluded_labels": [],
+  "num_point_clouds": 148,
+  "num_queries": 1126,
+  "num_train_queries": 504,
+  "num_val_queries": 217,
+  "num_test_queries": 90,
+  "num_test_structured_queries": 315,
+  "num_errors": 0,
+  "errors": []
+}

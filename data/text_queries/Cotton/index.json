@@ -1,0 +1,16 @@
+{
+  "crop": "Cotton",
+  "language": "en",
+  "task": "organ_segmentation",
+  "input_dir": "Crops3D/Cotton",
+  "output_dir": "data/text_queries/Cotton",
+  "excluded_labels": [],
+  "num_point_clouds": 176,
+  "num_queries": 1734,
+  "num_train_queries": 765,
+  "num_val_queries": 333,
+  "num_test_queries": 159,
+  "num_test_structured_queries": 477,
+  "num_errors": 0,
+  "errors": []
+}

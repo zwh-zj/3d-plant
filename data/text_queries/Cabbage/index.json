@@ -1,0 +1,16 @@
+{
+  "crop": "Cabbage",
+  "language": "en",
+  "task": "organ_segmentation",
+  "input_dir": "Crops3D/Cabbage",
+  "output_dir": "data/text_queries/Cabbage",
+  "excluded_labels": [],
+  "num_point_clouds": 196,
+  "num_queries": 3561,
+  "num_train_queries": 1702,
+  "num_val_queries": 639,
+  "num_test_queries": 305,
+  "num_test_structured_queries": 915,
+  "num_errors": 0,
+  "errors": []
+}

@@ -1,0 +1,18 @@
+{
+  "crop": "Tomato",
+  "language": "en",
+  "task": "organ_segmentation",
+  "input_dir": "Crops3D/Tomato",
+  "output_dir": "data/text_queries/Tomato",
+  "excluded_labels": [
+    2
+  ],
+  "num_point_clouds": 83,
+  "num_queries": 866,
+  "num_train_queries": 385,
+  "num_val_queries": 161,
+  "num_test_queries": 79,
+  "num_test_structured_queries": 241,
+  "num_errors": 0,
+  "errors": []
+}

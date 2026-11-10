@@ -1,0 +1,158 @@
+# =============================================================================
+# All crops, full clouds, same recipe as maize fpfix_v15 (20260716_153329)
+# =============================================================================
+# Aligned: epochs=50, pretrain=null, early_stop off, stem/soil oversample x2,
+#          mask_neg_weight=1.5, sparse_organ off, same optimizer/scheduler/model
+# Data: Crops3D/Crops3D full PLY -> all_crops_full_fpfix (scene_id without _10k)
+#       Do not change single_maize_* / root 10k labels
+# Launch:
+#   python -u tools/train_crops3d.py configs/crops3d_full_baseline_fpfix_v15.yaml \
+#     --gpu_ids 0 --num_gpus 1
+# =============================================================================
+
+train:
+  seed: 1999
+  epochs: 50
+  interval: 1
+  pretrain: null
+  save_epoch: 50
+  grad_clip: 0.1
+  save_iter: 0
+  early_stop:
+    enabled: false
+    patience: 10
+    min_delta: 0.0
+    metric: mIOU
+
+data:
+  train:
+    type: crops3d_organ
+    data_root: data/crops3d/
+    queries_json: data/crops3d/crops3d_train.json
+    prefix: train
+    suffix: _refer.pth
+    training: True
+    preload_scenes: true
+    mode: 4
+    aug: True
+    with_elastic: true
+    use_xyz: True
+    voxel_cfg:
+      scale: 50
+      spatial_shape: [128, 512]
+      max_npoint: 10000
+    max_des_len: 48
+    lang_num_max: 1
+    sparse_organ:
+      enabled: false
+
+  val:
+    type: crops3d_organ
+    data_root: data/crops3d/
+    queries_json: data/crops3d/crops3d_val.json
+    prefix: val
+    suffix: _refer.pth
+    training: False
+    mode: 4
+    aug: False
+    with_elastic: False
+    use_xyz: True
+    voxel_cfg:
+      scale: 50
+      spatial_shape: [128, 512]
+      max_npoint: 10000
+    max_des_len: 48
+    lang_num_max: 1
+
+  test:
+    type: crops3d_organ
+    data_root: data/crops3d/
+    queries_json: data/crops3d/crops3d_test.json
+    queries_json_structured: data/crops3d/crops3d_test_structured.json
+    prefix: test
+    suffix: _refer.pth
+    training: False
+    mode: 4
+    aug: False
+    with_elastic: False
+    use_xyz: True
+    voxel_cfg:
+      scale: 50
+      spatial_shape: [128, 512]
+      max_npoint: 10000
+    max_des_len: 48
+    lang_num_max: 1
+
+dataloader:
+  train:
+    batch_size: 4
+    num_workers: 4
+    persistent_workers: true
+  val:
+    batch_size: 1
+    num_workers: 2
+    persistent_workers: true
+  test:
+    batch_size: 1
+    num_workers: 2
+    persistent_workers: true
+
+model:
+  input_channel: 6
+  blocks: 5
+  block_reps: 2
+  media: 32
+  normalize_before: True
+  return_blocks: True
+  pool: mean
+  infer_mode: sem
+  fps_num: 256
+  sampling_module:
+    num_proposal: 128
+    pc_dim: 256
+    lang_dim: 256
+    d_model: 256
+  mdin:
+    num_layer: 6
+    d_model: 256
+    nhead: 8
+    hidden_dim: 1024
+    dropout: 0.0
+    activation_fn: gelu
+    iter_pred: True
+    attn_mask: True
+    kernel: w_sum
+    global_feat: mean
+    lang_att: True
+    contrastive_align_loss: False
+  criterion:
+    loss_weight: [1.0, 1.0, 1.0, 5.0, 0.1, 0.0]
+    cost_weight: [1.0, 1.0, 0.1]
+    loss_fun: focal
+    match_last_layer: True
+    layer_differ_weight: True
+    pos_loss: False
+    mask_neg_weight: 1.5
+  test_cfg:
+    topk_insts: 100
+    score_thr: 0.0
+    npoint_thr: 100
+  norm_eval: True
+  fix_module: []
+  task_type: gres
+
+optimizer:
+  type: AdamW
+  lr: 0.0001
+  weight_decay: 0.0005
+  paramwise_cfg:
+    bert_encoder:
+      lr_mult: 0.1
+    mdin:
+      lr_mult: 1.0
+
+lr_scheduler:
+  type: PolyLR
+  max_iters: 50
+  power: 4.0
+  constant_ending: 0.0

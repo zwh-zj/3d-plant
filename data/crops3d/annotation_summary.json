@@ -1,0 +1,30 @@
+{
+  "num_train": 7143,
+  "num_val": 2868,
+  "num_test": 1355,
+  "num_test_structured": 4132,
+  "num_scenes_train": 576,
+  "split_note": "train/val are a 7:3 stratified split of official train scenes that exist locally; train and val use spatial+relation structured text; crops3d_test.json is official test canonical templates; crops3d_test_structured.json is structured-text test on the same scenes/GT",
+  "crop_distribution": {
+    "Cabbage": 1702,
+    "Cotton": 765,
+    "Maize": 1933,
+    "Potato": 513,
+    "Rapeseed": 1095,
+    "Rice": 246,
+    "Tomato": 385,
+    "Wheat": 504
+  },
+  "organ_distribution": {
+    "shoot_system": 1728,
+    "leaf": 1131,
+    "stem": 1125,
+    "soil": 963,
+    "pot": 858,
+    "land": 376,
+    "rhizobox": 288,
+    "cotton_ball": 258,
+    "corn": 216,
+    "tassel": 200
+  }
+}
