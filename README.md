@@ -64,3 +64,22 @@ On WSL, also add the Windows GPU driver library:
 ```bash
 export LD_LIBRARY_PATH="/usr/lib/wsl/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 ```
+
+## Data
+
+| Dataset | Download |
+| --- | --- |
+| Crops3D | https://doi.org/10.6084/m9.figshare.27313272 |
+| Pheno4D | https://www.ipb.uni-bonn.de/html/projects/Pheno4D/Pheno4D.zip |
+
+The Crops3D DOI opens the Figshare record. Download `Crops3D.zip` from that page. The dataset description and split files are also listed at https://github.com/clawCa/Crops3D.
+
+The Pheno4D page is https://www.ipb.uni-bonn.de/data/pheno4d/. The zip above is the full archive linked from that page.
+
+## Text encoder
+
+The model loads RoBERTa-base from `backbones/roberta-base/` with `local_files_only=True`.
+
+Download the text encoder from https://huggingface.co/roberta-base and place it in that directory. The weight file is:
+
+https://huggingface.co/roberta-base/resolve/main/pytorch_model.bin
