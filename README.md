@@ -65,6 +65,29 @@ On WSL, also add the Windows GPU driver library:
 export LD_LIBRARY_PATH="/usr/lib/wsl/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 ```
 
+## Train and test
+
+Run both commands from the repository root with `3d-gres` activated and `PYTHONPATH` set as above. Processed `.pth` files must already be under `data/crops3d/train`, `data/crops3d/val`, and `data/crops3d/test`.
+
+Train on one GPU. Checkpoints go to `exps/crops3d_full_baseline_fpfix_v15/<timestamp>/`.
+
+```bash
+python -u tools/train_crops3d.py configs/crops3d_full_baseline_fpfix_v15.yaml \
+  --gpu_ids 0 --num_gpus 1
+```
+
+The same command is wrapped by `bash scripts/train_crops3d_full_fpfix_v15.sh`.
+
+Test a saved checkpoint. `--test_mode canonical` uses `data/crops3d/crops3d_test.json`. Use `structured` for `data/crops3d/crops3d_test_structured.json`.
+
+```bash
+python -u tools/test_crops3d.py configs/crops3d_full_baseline_fpfix_v15.yaml \
+  --checkpoint exps/crops3d_full_baseline_fpfix_v15/<timestamp>/best.pth \
+  --test_mode canonical \
+  --sample_seed 1999 \
+  --gpu_ids 0 --num_gpus 1
+```
+
 ## Data
 
 | Dataset | Download |
