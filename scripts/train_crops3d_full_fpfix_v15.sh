@@ -10,6 +10,8 @@
 #
 set -euo pipefail
 cd "$(dirname "$0")/.."
+export PYTHONPATH="$(pwd):$(pwd)/gres_model/lib${PYTHONPATH:+:$PYTHONPATH}"
+export LD_LIBRARY_PATH="/usr/lib/wsl/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 
 if [[ -z "${PYTHON:-}" ]]; then
   if [[ -x /home/zwh/miniconda3/envs/3d-gres/bin/python ]]; then
